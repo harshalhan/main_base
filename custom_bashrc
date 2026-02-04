@@ -35,8 +35,8 @@ parse_git_branch() {
 export EDITOR=micro
 export LANG=en_US.UTF-8
 
-# Custom directory shortcuts (adjust paths as needed for Linux VM)
-MAIN_WORK="/main_work"
+# Custom directory shortcuts (adjusted paths for Linux VM)
+MAIN_WORK="/home/ubuntu/main_work"
 TRASH="$HOME/.Trash/"
 export MAIN_WORK TRASH
 
@@ -63,15 +63,15 @@ esac
 # ============================================================================
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    
+
     # Custom LS_COLORS: directories in purple (35), media files in default (00)
     export LS_COLORS="${LS_COLORS:+${LS_COLORS}:}di=35:*.png=00:*.jpg=00:*.jpeg=00:*.gif=00:*.mp4=00:*.mov=00"
-    
+
     alias ls='ls --color=auto'
     alias ll='ls -alF --color=auto'
     alias la='ls -A --color=auto'
     alias l='ls -CF --color=auto'
-    
+
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
@@ -111,7 +111,14 @@ fi
 # ============================================================================
 # PATH CONFIGURATION
 # ============================================================================
-export PATH="/main_work:$PATH"
+export PATH="/home/ubuntu/main_work/homebrew/bin:/home/ubuntu/main_work:$PATH"
+
+# ============================================================================
+# HOMEBREW CONFIGURATION
+# ============================================================================
+if [ -f "/home/ubuntu/main_work/homebrew/bin/brew" ]; then
+    eval "$(/home/ubuntu/main_work/homebrew/bin/brew shellenv)"
+fi
 
 # ============================================================================
 # NVM CONFIGURATION (if installed)
@@ -125,15 +132,17 @@ export NVM_DIR="$HOME/.nvm"
 # ============================================================================
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/main_work/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/main_work/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/main_work/miniconda3/etc/profile.d/conda.sh"
+if [ -f "/home/ubuntu/main_work/miniconda3/bin/conda" ]; then
+    __conda_setup="$('/home/ubuntu/main_work/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
     else
-        export PATH="/main_work/miniconda3/bin:$PATH"
+        if [ -f "/home/ubuntu/main_work/miniconda3/etc/profile.d/conda.sh" ]; then
+            . "/home/ubuntu/main_work/miniconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/home/ubuntu/main_work/miniconda3/bin:$PATH"
+        fi
     fi
+    unset __conda_setup
 fi
-unset __conda_setup
 # <<< conda initialize
