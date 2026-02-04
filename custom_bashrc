@@ -64,8 +64,9 @@ esac
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
 
-    # Custom LS_COLORS: directories in purple (35), media files in default (00)
-    export LS_COLORS="${LS_COLORS:+${LS_COLORS}:}di=35:*.png=00:*.jpg=00:*.jpeg=00:*.gif=00:*.mp4=00:*.mov=00"
+    # Custom LS_COLORS: directories in vibrant purple (35;1 = bold purple), media files in default (00)
+    # Override the default blue directory color with purple
+    export LS_COLORS="di=35;1:ln=01;36:so=01;35:pi=40;33:ex=01;32:bd=40;33;01:cd=40;33;01:su=37;41:sg=30;43:tw=30;42:ow=34;42:st=37;44:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.png=00:*.jpg=00:*.jpeg=00:*.gif=00:*.bmp=00:*.pbm=00:*.pgm=00:*.ppm=00:*.tga=00:*.xbm=00:*.xpm=00:*.tif=00:*.tiff=00:*.svg=00:*.svgz=00:*.mng=00:*.pcx=00:*.mp4=00:*.mov=00:*.mpg=00:*.mpeg=00:*.m2v=00:*.mkv=00:*.webm=00:*.webp=00:*.ogm=00:*.mp3=00:*.m4a=00:*.ogg=00:*.wav=00:*.flac=00"
 
     alias ls='ls --color=auto'
     alias ll='ls -alF --color=auto'
@@ -146,3 +147,5 @@ if [ -f "/home/ubuntu/main_work/miniconda3/bin/conda" ]; then
     unset __conda_setup
 fi
 # <<< conda initialize
+
+# changed
